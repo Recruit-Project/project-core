@@ -1,4 +1,4 @@
-package com.kyj.fmk.core.file.s3;
+package com.kyj.fmk.core.file.obj;
 
 
 import com.kyj.fmk.core.exception.custom.KyjBizException;
@@ -8,10 +8,7 @@ import com.kyj.fmk.core.model.enm.ApiErrCode;
 import com.kyj.fmk.core.model.enm.FileType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.BadRequestException;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +24,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -38,7 +34,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class S3FileService implements FileService {
+public class ObjFileService implements FileService {
 
     @Value("${s3.credentials.bucket}")
     private String bucket;
