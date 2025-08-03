@@ -40,13 +40,15 @@ publishing {
 	}
 }
 dependencies {
-
+		//카프카
+		api 'org.springframework.kafka:spring-kafka'
 		//스프링 프로브
 		api 'org.springframework.boot:spring-boot-starter-actuator'
 		//프로메테우스 메트릭 노출
 		api 'io.micrometer:micrometer-registry-prometheus'
 		//마이바티스
 	    api 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
 		api 'org.springframework.boot:spring-boot-starter-web'
 		api 'org.springframework.boot:spring-boot-starter-security'
 		api 'org.springframework.boot:spring-boot-starter-oauth2-client'
