@@ -1,4 +1,4 @@
-package com.kyj.fmk.core.file.s3;
+package com.kyj.fmk.core.file.obj;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +12,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 
 @Slf4j
 @Configuration
-public class S3Config {
+public class ObjFileConfig {
     /*AWS S3 CONFIG*/
     @Value("${s3.credentials.access-key}")
     private String accessKey;
