@@ -40,8 +40,11 @@ publishing {
 	}
 }
 dependencies {
+		//s3
+	    api 'software.amazon.awssdk:s3:2.27.2'
+		api 'software.amazon.awssdk:url-connection-client:2.27.2'
 		//카프카
-		api 'org.springframework.kafka:spring-kafka'
+	    api 'org.springframework.kafka:spring-kafka'
 		//스프링 프로브
 		api 'org.springframework.boot:spring-boot-starter-actuator'
 		//프로메테우스 메트릭 노출

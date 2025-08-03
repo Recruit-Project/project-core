@@ -10,8 +10,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import java.io.IOException;
 import java.net.URL;
 
-//@SpringBootApplication
-//@EnableCaching // 상위애플리케이션에서 정의
+@SpringBootApplication
+@EnableCaching // 상위애플리케이션에서 정의
 public class CoreApplication {
 
 	public static void main(String[] args) {
