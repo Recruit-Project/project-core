@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
         String msg = list.isEmpty() ? "잘못된 요청입니다." : list.get(0);
         msg = list.get(0);
 
-        ResApiErrDTO<Void> resApiErrDTO = new ResApiErrDTO<>(msg, HttpStatus.BAD_REQUEST.value());
+        ResApiErrDTO<Void> resApiErrDTO = new ResApiErrDTO<>(msg, HttpStatus.BAD_REQUEST.value(),ApiErrCode.CM013.getCode());
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -99,7 +99,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MyBatisSystemException.class)
     public ResponseEntity<ResApiErrDTO<?>> handleValidationException(MyBatisSystemException ex) {
-        log.info("ex={}",ex);
 
         ResApiErrDTO<Void> resApiErrDTO = ErrHelper.determineErrRes(new KyjSysException(ApiErrCode.CM002));
         return ResponseEntity

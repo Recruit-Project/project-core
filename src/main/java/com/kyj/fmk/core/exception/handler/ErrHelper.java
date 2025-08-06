@@ -23,8 +23,8 @@ public class ErrHelper {
     public static ResApiErrDTO<Void> determineErrRes(Exception ex){
         String msg = determineErrMsg(ex);
         HttpStatus status = determineErrStatus(ex);
-
-        ResApiErrDTO<Void> resApiErrDTO = new ResApiErrDTO(msg,status.value());
+        String apiErrCode = determineErrCode(ex);
+        ResApiErrDTO<Void> resApiErrDTO = new ResApiErrDTO(msg,status.value(),apiErrCode);
 
         return resApiErrDTO;
     }
@@ -50,6 +50,16 @@ public class ErrHelper {
         return msg;
     }
 
+    public static String determineErrCode(Exception ex){
+
+        if(ex instanceof KyjBaseException){
+            ex = (KyjBaseException)ex;
+            return  ((KyjBaseException) ex).getCode();
+
+        }else{
+            return ApiErrCode.CM001.getCode();
+        }
+    }
 
 
     /**
