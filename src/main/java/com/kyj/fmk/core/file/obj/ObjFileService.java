@@ -4,7 +4,7 @@ package com.kyj.fmk.core.file.obj;
 import com.kyj.fmk.core.exception.custom.KyjBizException;
 import com.kyj.fmk.core.exception.custom.KyjSysException;
 import com.kyj.fmk.core.file.FileService;
-import com.kyj.fmk.core.model.enm.ApiErrCode;
+import com.kyj.fmk.core.model.enm.CmErrCode;
 import com.kyj.fmk.core.model.enm.FileType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ public class ObjFileService implements FileService {
     @Override
     public String upload(MultipartFile file, FileType[] fileTypes) {
         if(file == null){
-            throw new KyjBizException(ApiErrCode.CM009);
+            throw new KyjBizException(CmErrCode.CM009);
         }
 
         String originalFilename = file.getOriginalFilename();
@@ -65,12 +65,12 @@ public class ObjFileService implements FileService {
         for(FileType fileType : fileTypes){
             validResult = fileType.supports(extension);
             if(!validResult){
-                throw new KyjBizException(ApiErrCode.CM007);
+                throw new KyjBizException(CmErrCode.CM007);
             }
         }
 
         if (file.getSize() > MAX_FILE_SIZE) {
-            throw new KyjBizException(ApiErrCode.CM008);
+            throw new KyjBizException(CmErrCode.CM008);
         }
 
         try {
@@ -83,11 +83,11 @@ public class ObjFileService implements FileService {
 
         s3Client.putObject(putObjectRequest, RequestBody.fromBytes(bytes));
     } catch (S3Exception e) {
-            throw new KyjSysException(ApiErrCode.CM009);
+            throw new KyjSysException(CmErrCode.CM009);
     } catch (SdkException e) {
-            throw new KyjSysException(ApiErrCode.CM009);
+            throw new KyjSysException(CmErrCode.CM009);
     } catch (IOException e) {
-            throw new KyjSysException(ApiErrCode.CM009);
+            throw new KyjSysException(CmErrCode.CM009);
         }
 
         return s3Client
@@ -113,9 +113,9 @@ public class ObjFileService implements FileService {
             s3Client.deleteObject(deleteObjectRequest);
 
         } catch (S3Exception e) {
-            throw new KyjSysException(ApiErrCode.CM010);
+            throw new KyjSysException(CmErrCode.CM010);
         } catch (Exception e) {
-            throw new KyjSysException(ApiErrCode.CM010);
+            throw new KyjSysException(CmErrCode.CM010);
         }
 
     }
@@ -145,9 +145,9 @@ public class ObjFileService implements FileService {
             return new ResponseEntity<>(objectBytes.asByteArray(), headers, HttpStatus.OK);
 
         } catch (NoSuchKeyException e) {
-           throw new KyjSysException(ApiErrCode.CM011);
+           throw new KyjSysException(CmErrCode.CM011);
         } catch (Exception e) {
-            throw new KyjSysException(ApiErrCode.CM011);
+            throw new KyjSysException(CmErrCode.CM011);
         }
 
     }
@@ -160,12 +160,12 @@ public class ObjFileService implements FileService {
             String decodedPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8.name());
             return decodedPath.startsWith("/") ? decodedPath.substring(1) : decodedPath;
         } catch (MalformedURLException e) {
-            throw new KyjSysException(ApiErrCode.CM010);
+            throw new KyjSysException(CmErrCode.CM010);
         } catch (UnsupportedEncodingException e) {
-            throw new KyjSysException(ApiErrCode.CM010);
+            throw new KyjSysException(CmErrCode.CM010);
         }
         catch (Exception e) {
-            throw new KyjSysException(ApiErrCode.CM010);
+            throw new KyjSysException(CmErrCode.CM010);
         }
     }
 }

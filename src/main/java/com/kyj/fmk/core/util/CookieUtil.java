@@ -1,15 +1,12 @@
 package com.kyj.fmk.core.util;
 
-import com.kyj.fmk.core.model.enm.ApiErrCode;
+import com.kyj.fmk.core.model.enm.CmErrCode;
 import com.kyj.fmk.core.exception.custom.KyjSysException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
-
-import java.util.Arrays;
 
 /**
  * 2025-05-31
@@ -53,7 +50,7 @@ public class CookieUtil {
                     }
                 }
             }catch (Exception e){
-                throw new KyjSysException(ApiErrCode.CM003);
+                throw new KyjSysException(CmErrCode.CM003);
             }
 
 
