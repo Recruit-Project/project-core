@@ -9,6 +9,6 @@ public class RedisKey {
     /**
      * 서비스명:키:키:
      */
-    public static final String MEMBER_ADDITIONL_INFO="member:addtitionalInfo:";
+    public static final String MEMBER_ADDITIONL_INFO="member:joinJwt:";
 
 }
