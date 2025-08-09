@@ -60,7 +60,6 @@ public class TxAdvisor {
     public static class TxAspect{
         @Around("@annotation(org.springframework.transaction.annotation.Transactional)")
         public Object manageTransaction(ProceedingJoinPoint joinPoint) throws Throwable {
-            log.info("sdasdsa");
             return joinPoint.proceed();
         }
     }

@@ -10,6 +10,11 @@ import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 
+/**
+ * 2025-05-29
+ * @author 김용준
+ * Restful Api에서 사용하는 S3CONFIG
+ */
 @Slf4j
 @Configuration
 public class ObjFileConfig {
@@ -27,11 +32,8 @@ public class ObjFileConfig {
 
     @Bean
     public S3Client s3Client() {
-        log.info("key={}",accessKey);
-        log.info("sec={}",secretKey);
-        log.info("Rg={}",region);
+
         AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(accessKey, secretKey);
-        log.info("awscr={}",awsCredentials);
         return S3Client.builder()
                 .region(Region.of(region))
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))

@@ -44,6 +44,12 @@ public class ObjFileService implements FileService {
 
     private final S3Client s3Client;
 
+    /**
+     * 파일업로드
+     * @param file
+     * @param fileTypes
+     * @return
+     */
     @Override
     public String upload(MultipartFile file, FileType[] fileTypes) {
         if(file == null){
@@ -92,6 +98,10 @@ public class ObjFileService implements FileService {
                 .toExternalForm();
     }
 
+    /**
+     * 파일삭제
+     * @param fileAddress
+     */
     @Override
     public void delete(String fileAddress) {
         String key = getKeyFromImageAddress(fileAddress);
@@ -111,7 +121,11 @@ public class ObjFileService implements FileService {
     }
 
 
-
+    /**
+     * 파일다운로드
+     * @param filename
+     * @return
+     */
     @Override
     public ResponseEntity<byte[]> download(String filename) {
         try {
