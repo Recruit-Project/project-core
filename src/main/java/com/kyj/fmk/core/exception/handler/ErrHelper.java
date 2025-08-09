@@ -4,7 +4,10 @@ import com.kyj.fmk.core.exception.custom.*;
 import com.kyj.fmk.core.model.ErrCode;
 import com.kyj.fmk.core.model.dto.ResApiErrDTO;
 import com.kyj.fmk.core.model.enm.CmErrCode;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,27 +19,15 @@ import java.util.ServiceLoader;
  * @author 김용준
  * Restful Api에서 사용하는 에러응답객체에 대한 메시지 혹은 상태값 등을 결정해주는 Helper클래스이다.
  */
+@Component
 public class ErrHelper {
 
-    private static final Map<String, ErrCode> ERR_CODE_MAP = new HashMap<>();
+    private static ErrCodeRegistry errCodeRegistry;
 
-    /**
-     * ErrCode를 상속받은 에러코드를 로드한다.
-     */
-    static {
-        loadAllErrCodes("com.kyj"); // 패키지 루트 지정
-    }
 
-    private static void loadAllErrCodes(String basePackage) {
-        try {
-
-            ServiceLoader<ErrCode> loader = ServiceLoader.load(ErrCode.class);
-            for (ErrCode errCode : loader) {
-                ERR_CODE_MAP.put(errCode.getCode(), errCode);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("ErrCode 로드 실패", e);
-        }
+    @Autowired
+    public void setErrCodeRegistry(ErrCodeRegistry registry) {
+        ErrHelper.errCodeRegistry = registry;
     }
     /**
      * 전체에러응답객체값을 세팅해준다.
@@ -56,22 +47,19 @@ public class ErrHelper {
      * @param ex
      * @return String
      */
-    public static String determineErrMsg(Exception ex ){
-        String code = "";
-        String msg = "";
-        if(ex instanceof KyjBaseException){
-            ex = (KyjBaseException)ex;
-            code =  ((KyjBaseException) ex).getCode();
+    public static String determineErrMsg(Exception ex) {
+        if (ex instanceof KyjBaseException kyjEx) {
+            String code = kyjEx.getCode();
 
-            if(code.equals(CmErrCode.CM001.getCode())){
-                return ((KyjBaseException) ex).getMsg();
-            }else{
-                msg = Optional.ofNullable(ERR_CODE_MAP.get(code))
+            if (code.equals(CmErrCode.CM001.getCode())) {
+                return kyjEx.getMsg();
+            } else {
+                return errCodeRegistry.get(code)
                         .map(ErrCode::getMsg)
                         .orElse(CmErrCode.CM014.getMsg());
             }
         }
-        return msg;
+        return "";
     }
 
     public static String determineErrCode(Exception ex){
