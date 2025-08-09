@@ -1,6 +1,6 @@
 package com.kyj.fmk.core.model.dto;
 
-import com.kyj.fmk.core.model.enm.ApiErrCode;
+import com.kyj.fmk.core.model.enm.CmErrCode;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -51,7 +51,7 @@ public class ResApiErrDTO <T> extends BaseResDTO{
      */
     private void setDefaultVal(){
         this.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        this.setCode(ApiErrCode.CM002.getCode());
+        this.setCode(CmErrCode.CM002.getCode());
     }
 
 }
