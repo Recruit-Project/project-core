@@ -17,15 +17,25 @@ public class RedisKey {
     public static final String MEMBER_ADDITIONL_INFO="member:joinJwt:";
 
     /**
-     * 스킬코드 조회를  위한 해시키
+     * 스킬코드 조회를 위한 해시키
      */
     public static final String SKILL_CD_KEY="skill_cd:";
+
+    /**
+     * 스킬코드 전체조회를 위한 해시키
+     */
+    public static final String SKILL_CD_KEY_ALL="skill_cd:all";
 
     /**
      * 직무코드 조회를  위한 해시키
      */
     public static final String DTY_CD_KEY="dty_cd:";
 
+
+    /**
+     * 직무코드 전체조회를  위한 해시키
+     */
+    public static final String DTY_CD_KEY_ALL="dty_cd:all";
     /**
      * 공통코드(커뮤니케이션톤) 조회를  위한 해시키
      */
@@ -56,4 +66,19 @@ public class RedisKey {
      * 공통코드(지원상태코드) 조회를  위한 해시키
      */
     public static final String  CM_APY_ST_CD="cm_apy_st_cd";
+
+
+
+
+//-----------------------------------------suffix -----------------------------------------------------------------------------------
+
+    /**
+     * 레디스 해시키 조회를 위한 suffix 스킬이름
+     */
+    public static final  String SUFFIX_SKILL_NM_KEY="skillNm";
+
+    /**
+     * 레디스 해시키 조회를 위한 suffix 스킬이름
+     */
+    public static final  String SUFFIX_SKILL_CD_IMG_KEY="skillCdImg";
 }
