@@ -19,12 +19,12 @@ public class RedisKey {
     /**
      * 스킬코드 조회를  위한 해시키
      */
-    public static final String SKILL_CD_KEY="skill_cd";
+    public static final String SKILL_CD_KEY="skill_cd:";
 
     /**
      * 직무코드 조회를  위한 해시키
      */
-    public static final String DTY_CD_KEY="dty_cd";
+    public static final String DTY_CD_KEY="dty_cd:";
 
     /**
      * 공통코드(커뮤니케이션톤) 조회를  위한 해시키
