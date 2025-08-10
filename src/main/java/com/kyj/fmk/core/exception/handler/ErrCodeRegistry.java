@@ -10,7 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
+/**
+ * 2025-05-29
+ * @author 김용준
+ * Restful Api에서 사용하는 에러코드를 ErrCodeRegistry로 전부로드한다.
+ */
 @Component
 public class ErrCodeRegistry {
 
