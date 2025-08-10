@@ -81,4 +81,16 @@ public class RedisKey {
      * 레디스 해시키 조회를 위한 suffix 스킬이름
      */
     public static final  String SUFFIX_SKILL_CD_IMG_KEY="skillCdImg";
+
+
+
+    /**
+     * 레디스 해시키 조회를 위한 suffix 스킬이름
+     */
+    public static final  String SUFFIX_DTY_NM_KEY="dtyNm";
+
+    /**
+     * 레디스 해시키 조회를 위한 suffix 스킬이름
+     */
+    public static final  String SUFFIX_DTY_CD_IMG_KEY="dtyCdImg";
 }
