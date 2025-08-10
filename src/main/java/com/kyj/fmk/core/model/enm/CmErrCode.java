@@ -27,6 +27,7 @@ public enum CmErrCode implements ErrCode {
     CM012("CM012","분산락획득에 실패하였습니다."),
     CM013("CM013","MethodNotArgumentEx"),
     CM014("CM014","응답메시지가 존재하지 않습니다."),
+    CM015("CM015","조회할 내용이 없습니다."),
 
 
 
@@ -51,25 +52,6 @@ public enum CmErrCode implements ErrCode {
         this.msg = msg;
     }
 
-//    /**
-//     * 정적 맵 초기화 (O(1) 조회용)
-//     */
-//    private static final Map<String, CmErrCode> CODE_MAP = new HashMap<>();
-//
-//    static {
-//        for (CmErrCode errCode : values()) {
-//            CODE_MAP.put(errCode.code, errCode);
-//        }
-//    }
-//
-//    /**
-//     * O1복잡도로 정적 맵에서 알맞은 메시지를 가져온다.
-//     * @param code
-//     * @return ApiErrCode
-//     */
-//    public static String of(String code) {
-//        return CODE_MAP.get(code).getMsg();
-//    }
 
 
 
