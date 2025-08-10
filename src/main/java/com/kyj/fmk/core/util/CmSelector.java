@@ -13,11 +13,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CmSelector {
 
-    private   RedisTemplate<String,String> redisTemplate;
-
-    public CmSelector(RedisTemplate<String,String> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
+    private final RedisTemplate<String,String> redisTemplate;
 
     /**
      * 기술코드,직무코드,공통코드의 여부 ( rediskey)
