@@ -1,9 +1,16 @@
 package com.kyj.fmk.core.service.cmcd;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kyj.fmk.core.exception.custom.KyjBizException;
+import com.kyj.fmk.core.exception.custom.KyjSysException;
 import com.kyj.fmk.core.model.CmCdConst;
 import com.kyj.fmk.core.model.cmcd.req.ReqCommonCdDTO;
 import com.kyj.fmk.core.model.cmcd.req.ReqSkillCdDTO;
 import com.kyj.fmk.core.model.cmcd.res.ResCommonCdDTO;
+import com.kyj.fmk.core.model.cmcd.res.ResSkillCdDTO;
+import com.kyj.fmk.core.model.enm.CmErrCode;
 import com.kyj.fmk.core.redis.RedisKey;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +33,8 @@ import java.util.Map;
 public class CmCdRedisServiceImpl implements CmCdRedisService{
 
     private final RedisTemplate<String,String> redisTemplate;
+
+    private final ObjectMapper objectMapper;
     /**
      * 공통코드를 레디스에서 조회하는 서비스
      * @param reqCommonCdDTO
@@ -69,18 +78,61 @@ public class CmCdRedisServiceImpl implements CmCdRedisService{
         return grpStCdMap;
     }
 
+
     /**
-     * 사용기술 을 레디스에서 조회하는 서비스
+     * 사용기술 을 레디스에서 전체 조회하는 서비스
+     * @param
+     * @return
+     */
+    @Override
+    public Map<String, ResSkillCdDTO> selectRedisSkillAllMap() {
+
+        HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
+
+        Map<String, String> skillMap =  null;
+        Map<String, ResSkillCdDTO> dtoMap = null;
+
+        for (Map.Entry<String, String> entry : skillMap.entrySet()) {
+            String key = entry.getKey();
+            String jsonValue = entry.getValue();
+
+            try {
+                ResSkillCdDTO dto = objectMapper.readValue(jsonValue, ResSkillCdDTO.class);
+                dtoMap.put(key, dto);
+            } catch (JsonProcessingException e) {
+                throw new KyjSysException(CmErrCode.CM016);
+            }
+
+
+        }
+
+
+        return dtoMap;
+    }
+
+    /**
+     *  사용기술 을 레디스에서 하나만 조회하는 서비스
      * @param reqSkillCdDTO
      * @return
      */
     @Override
-    public Map<String, String> selectRedisSkillMap(ReqSkillCdDTO reqSkillCdDTO) {
+    public  ResSkillCdDTO selectRedisSkillEachMap(ReqSkillCdDTO reqSkillCdDTO) {
         HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
 
         Map<String, String> skillMap =  null;
+        ResSkillCdDTO resSkillCdDTO = new ResSkillCdDTO();
 
+        skillMap = hashOps.entries(RedisKey.SKILL_CD_KEY+reqSkillCdDTO.getSkillCd());
+        String skillNm =skillMap.get(RedisKey.SUFFIX_SKILL_NM_KEY);
+        String skillCdImg =skillMap.get(RedisKey.SUFFIX_SKILL_CD_IMG_KEY);
 
-        return Map.of();
+        resSkillCdDTO.setSkillCd(reqSkillCdDTO.getSkillCd());
+        resSkillCdDTO.setSkillNm(skillNm);
+        resSkillCdDTO.setSkillCdImg(skillCdImg);
+
+        return resSkillCdDTO;
     }
+
+
+
 }
