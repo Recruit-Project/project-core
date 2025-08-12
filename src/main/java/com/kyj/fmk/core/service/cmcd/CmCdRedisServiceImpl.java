@@ -19,6 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -90,7 +91,7 @@ public class CmCdRedisServiceImpl implements CmCdRedisService{
         HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
 
         Map<String, String> skillMap =   hashOps.entries(RedisKey.SKILL_CD_KEY_ALL);
-        Map<String, ResSkillCdDTO> dtoMap = null;
+        Map<String, ResSkillCdDTO> dtoMap = new HashMap<>();
 
         for (Map.Entry<String, String> entry : skillMap.entrySet()) {
             String key = entry.getKey();
