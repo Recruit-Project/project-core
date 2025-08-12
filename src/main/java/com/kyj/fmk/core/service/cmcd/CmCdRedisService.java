@@ -4,6 +4,7 @@ import com.kyj.fmk.core.model.cmcd.req.ReqCommonCdDTO;
 import com.kyj.fmk.core.model.cmcd.res.ResCommonCdDTO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 2025-08-111
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface CmCdRedisService {
 
-    public List<ResCommonCdDTO> selectRedisCmCdList(ReqCommonCdDTO reqCommonCdDTO);
+    public Map<String, String> selectRedisCmCdList(ReqCommonCdDTO reqCommonCdDTO);
 }
