@@ -89,7 +89,7 @@ public class CmCdRedisServiceImpl implements CmCdRedisService{
 
         HashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
 
-        Map<String, String> skillMap =  null;
+        Map<String, String> skillMap =   hashOps.entries(RedisKey.SKILL_CD_KEY_ALL);
         Map<String, ResSkillCdDTO> dtoMap = null;
 
         for (Map.Entry<String, String> entry : skillMap.entrySet()) {
