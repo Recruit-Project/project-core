@@ -1,6 +1,7 @@
 package com.kyj.fmk.core.service.cmcd;
 
 import com.kyj.fmk.core.model.cmcd.req.ReqCommonCdDTO;
+import com.kyj.fmk.core.model.cmcd.req.ReqSkillCdDTO;
 import com.kyj.fmk.core.model.cmcd.res.ResCommonCdDTO;
 
 import java.util.List;
@@ -13,6 +14,13 @@ import java.util.Map;
  *
  */
 public interface CmCdRedisService {
+    /**
+     * 공통코드를 레디스에서 조회하는 서비스
+     * @param reqCommonCdDTO
+     * @return
+     */
+    public Map<String, String> selectRedisCmCdMap(ReqCommonCdDTO reqCommonCdDTO);
 
-    public Map<String, String> selectRedisCmCdList(ReqCommonCdDTO reqCommonCdDTO);
+
+    public Map<String,String> selectRedisSkillMap(ReqSkillCdDTO reqSkillCdDTO);
 }
